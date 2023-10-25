@@ -26,7 +26,7 @@ class DisplayInfor extends React.Component {
                     </button>
                 </div>
                 {this.state.isShow &&
-                    <div>
+                    <>
                         <hr />
                         {listUsers.map((user) => {
                             return (
@@ -37,7 +37,7 @@ class DisplayInfor extends React.Component {
                                 </div>
                             )
                         })}
-                    </div>
+                    </>
                 }
                 <img src={logo} />
             </div>
