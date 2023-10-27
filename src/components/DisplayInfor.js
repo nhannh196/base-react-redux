@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./DisplayInfor.scss"
 // import logo from "../logo.svg"
 
@@ -69,39 +69,42 @@ import "./DisplayInfor.scss"
 // }
 
 const DisplayInfor = (props) => {
-   
-        // console.log('render')
-        const { listUsers } = props;
 
-        return (
-            <div className="display-infor-container">
-                <br />
-                {/* <div>
-                    <button onClick={() => { this.handleShowHide() }}>
+    // console.log('render')
+    const { listUsers } = props;
+    const [isShow, setIsShow] = useState(true);
+    const handleShowHide = () => {
+        setIsShow(!isShow)
+    }
+    return (
+        <div className="display-infor-container">
+            <br />
+            <div>
+                    <button onClick={() => {handleShowHide()}}>
                         {
-                            this.state.isShow ? "Hide" : "Show"
+                            isShow ? "Hide" : "Show"
                         }
                     </button>
-                </div> */}
-                {true &&
-                    <>
-                        <hr />
-                        {listUsers.map((user) => {
-                            return (
-                                <div key={user.id} className={+user.age > 18 ? "green" : "red"}>
-                                    <div>My name's {user.name}</div>
-                                    <div>My old's {user.age}</div>
-                                    <button onClick={() => {props.handleDeleteUser(user.id) }}>Delete</button>
-                                    <hr />
-                                </div>
-                            )
-                        })}
-                    </>
-                }
-                {/* <img src={logo} /> */}
-            </div>
-        )
-    
+                </div>
+            {isShow &&
+                <>
+                    <hr />
+                    {listUsers.map((user) => {
+                        return (
+                            <div key={user.id} className={+user.age > 18 ? "green" : "red"}>
+                                <div>My name's {user.name}</div>
+                                <div>My old's {user.age}</div>
+                                <button onClick={() => { props.handleDeleteUser(user.id) }}>Delete</button>
+                                <hr />
+                            </div>
+                        )
+                    })}
+                </>
+            }
+            {/* <img src={logo} /> */}
+        </div>
+    )
+
 }
 
 export default DisplayInfor
