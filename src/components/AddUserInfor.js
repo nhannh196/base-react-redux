@@ -1,45 +1,51 @@
-import React from "react";
+import React, { useState } from "react";
 
-class AddUserInfor extends React.Component {
-    state = {
+const AddUserInfor = (props) => {
+
+    const [user, setUser] = useState({
         name: 'Nhan',
         address: 'Vinh Long',
         age: 26
-    }
+    })
 
-    handleOnChangeName = (e) => {
-        this.setState({
-            name: e.target.value
-        })
+
+    const handleOnChangeName = (e) => {
+        setUser(
+            {
+                name: e.target.value,
+                age: user.age
+            }
+        )
     }
-    handleOnChangeAge = (e) => {
-        this.setState({
+    const handleOnChangeAge = (e) => {
+        setUser({
+            name:user.name,
             age: e.target.value
         })
     }
-    handleOnSubmit = (e) => {
+    const handleOnSubmit = (e) => {
         e.preventDefault();
-        const handleAddUser = this.props.handleAddUser;
-        handleAddUser({
-            name: this.state.name,
-            age: this.state.age
-        })
-    }
-    render() {
-        return (
-            <div>
-                My name is {this.state.name} and I'm {this.state.age}
-                {/* <button onClick={(e) => { this.handeClick(e) }}>Click</button>
-                <button onMouseOver={this.handeMouseOver}>Hover</button> */}
-                <form onSubmit={(e) => { this.handleOnSubmit(e) }}>
-                    <input value={this.state.name} type="text" onChange={(e) => { this.handleOnChangeName(e) }} />
-                    <input value={this.state.age} type="text" onChange={(e) => { this.handleOnChangeAge(e) }} />
-
-                    <input type='submit' />
-                </form>
-            </div>
+        console.log(user)
+        const handleAddUser = props.handleAddUser;
+        handleAddUser(
+           user 
         )
     }
+
+    return (
+        <div>
+            My name is {user.name} and I'm {user.age}
+            {/* <button onClick={(e) => { this.handeClick(e) }}>Click</button>
+                <button onMouseOver={this.handeMouseOver}>Hover</button> */}
+            <form onSubmit={(e) => { handleOnSubmit(e) }}>
+                <input value={user.name} type="text" onChange={(e) => { handleOnChangeName(e) }} />
+                <input value={user.age} type="text" onChange={(e) => { handleOnChangeAge(e) }} />
+
+                <input type='submit' />
+            </form>
+        </div>
+    )
+
 }
 
 export default AddUserInfor;
