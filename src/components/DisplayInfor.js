@@ -1,11 +1,32 @@
 import React from "react";
 import "./DisplayInfor.scss"
-import logo from "../logo.svg"
+// import logo from "../logo.svg"
 
 class DisplayInfor extends React.Component {
-    state = {
-        isShow: true
+    constructor(props) {
+        console.log('constructor')
+        super(props)
+        this.state = {
+            isShow: true
+        }
+
     }
+
+    componentDidMount(){
+        console.log('componentDidMount')
+        setTimeout(()=>{
+            document.title='Display Infor'
+        },3000)
+    }
+
+   componentDidUpdate(preProps,preState,spanshot) {
+    console.log('componentDidUpdate')
+    if(this.props.listUsers!==preProps){
+        if(this.props.listUsers.length===5){
+            alert('5 users added')
+        }
+    }
+   }
     handleShowHide = () => {
         this.setState({
             isShow: !this.state.isShow
@@ -13,6 +34,7 @@ class DisplayInfor extends React.Component {
     }
 
     render() {
+        console.log('render')
         const { listUsers } = this.props;
 
         return (
@@ -33,7 +55,7 @@ class DisplayInfor extends React.Component {
                                 <div key={user.id} className={+user.age > 18 ? "green" : "red"}>
                                     <div>My name's {user.name}</div>
                                     <div>My old's {user.age}</div>
-                                    <button onClick={()=>{this.props.handleDeleteUser(user.id)}}>Delete</button>
+                                    <button onClick={() => { this.props.handleDeleteUser(user.id) }}>Delete</button>
                                     <hr />
                                 </div>
                             )

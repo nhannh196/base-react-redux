@@ -12,7 +12,7 @@ class MyComponent extends React.Component {
 
     handleAddUser = (newUserInfor) => {
 
-        console.log(this.state.listUsers)
+        // console.log(this.state.listUsers)
         const newUser = {
             id: this.state.listUsers.length + 1,
             ...newUserInfor
@@ -32,9 +32,9 @@ class MyComponent extends React.Component {
         })
     }
 
-    resetkUser = () => {
+    resetUser = () => {
         if (this.state.listUsers.length === 1) {
-            if (this.state.listUsers[0].id != 1) {
+            if (this.state.listUsers[0].id !== 1) {
                 let userReset = [...this.state.listUsers]
                 console.log(userReset)
                 userReset[0].id = 1
@@ -48,11 +48,7 @@ class MyComponent extends React.Component {
 
 
     render() {
-        {
-            this.resetkUser();
-            // console.log(this.state.listUsers)
-
-        }
+        this.resetUser(); 
         return (
             <>
                 <AddUserInfor handleAddUser={this.handleAddUser} />
